@@ -7,7 +7,7 @@ import matplotlib.colors as colors
 import streamlit as st
 from f_Handler import csvHandler,jsonHandler
 
-#READ DATA JSON
+#DATA JSON
 with open("kode_negara_lengkap.json", "r") as read_file:
     fname = json.load(read_file)
 print(fname[0])
@@ -63,7 +63,7 @@ plt.scatter("Tahun", "Jumlah Produksi", color="yellow", marker='x', label='item 
 plt.show()
 right_col.pyplot(fig)
 
-#--b--
+#b
 list_kodekumpulannegara = []
 for i in list(csv_['kode_negara']) :
     if i not in list(df_info['alpha-3']) :
@@ -128,7 +128,7 @@ st.write(nama_negara)
 st.write(region_negara)
 st.write(subregion_negara)
 
-#d bagian 3
+#d
 dfproduksinol = dfb[dfb.produksi == 0]
 listnegaranol = []
 listregionol = []
