@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm 
 import matplotlib.colors as colors
 import streamlit as st
-from fileHandler import csvHandler,jsonHandler
+from f_Handler import csvHandler,jsonHandler
 
 #READ DATA JSON
 with open("kode_negara_lengkap.json", "r") as read_file:
@@ -88,3 +88,82 @@ print(df3)
 df3.plot.bar(x='kode_negara', y='produksi')
 plt.show()
 st.pyplot(plt)
+
+[21.06, 16/12/2021] Tan Manuel Itb: dfterkecil = dfb[dfb.produksi !=0]
+dfterkecil = dfterkecil.sort_values(by=['produksi'],ascending=True)
+jumlah_produksi = dfterkecil[:1].iloc[0]['produksi']
+kode_negara = dfterkecil[:1].iloc[0]['kode_negara']
+nama_negara = ""
+region_negara = ""
+subregion_negara = ""
+                                    
+for i in range(len(df_info)):
+    if list(df_info['alpha-3'])[i]==kode_negara:
+        nama_negara = list(df_info['name'])[i]
+        region_negara = list(df_info['region'])[i]
+        subregion_negara = list(df_info['sub-region'])[i]
+                                    
+st.write('Negara dengan Produksi Terkecil')
+st.write(jumlah_produksi)
+st.write(kode_negara)
+st.write(nama_negara)
+st.write(region_negara)
+st.write(subregion_negara)
+                                    
+dfakumulatifmin=dk[dk.kumulatif !=0]
+dfakumulatifmin = dfakumulatifmin[:1].sort_values(by=['kumulatif'], ascending = True)
+jumlah_produksi = dfakumulatifmin[:1].iloc[0]['kumulatif']
+kode_negara = dfakumulatifmin[:1].iloc[0]['kode_negara']
+nama_negara = ""
+region_negara = ""
+subregion_negara = ""
+                                                
+for i in range(len(df_info)):
+    if list(df_info['alpha-3'])[i]==kode_negara:
+        nama_negara = list(df_info['name'])[i]
+        region_negara = list(df_info['region'])[i]
+        subregion_negara = list(df_info['sub-region'])[i]
+                                                
+st.write('Negara dengan Produksi Terkecil Pada Keseluruhan Tahun')
+st.write(jumlah_produksi)
+st.write(kode_negara)
+st.write(nama_negara)
+st.write(region_negara)
+st.write(subregion_negara)
+
+#d bagian 3
+dfproduksinol = dfb[dfb.produksi == 0]
+listnegaranol = []
+listregionol = []
+listsubregionol = []
+
+for i in range(len(dfproduksinol)):
+    for j in range(len(df_info)):
+        if list (dfproduksinol['kode_negara'])[i] == list(df_info['alpha-3'])[j]:
+            listnegaranol.append(list(df_info['name'])[j])
+            listregionol.append(list(df_info['region'])[j])
+            listsubregionol.append(list(df_info['sub-region'])[j])
+
+dfproduksinol['negara'] = listnegaranol
+dfproduksinol['region'] = listregionol
+dfproduksinol['sub-region'] = listsubregionol
+ 
+                                                        
+dfproduksikumulatifnol = dfb[dfb.produksi == 0]
+listnegarakumulatifnol = []
+listregionkumulatifnol = []
+listsubregionkumulatifnol = []
+
+for i in range(len(dfproduksikumulatifnol)):
+    for j in range(len(df_info)):
+        if list (dfproduksikumulatifnol['kode_negara'])[i] == list(df_info['alpha-3'])[j]:
+            listnegarakumulatifnol.append(list(df_info['name'])[j])
+            listregionkumulatifnol.append(list(df_info['region'])[j])
+            listsubregionkumulatifnol.append(list(df_info['sub-region'])[j])
+
+dfproduksikumulatifnol['negara'] = listnegarakumulatifnol
+dfproduksikumulatifnol['region'] = listregionkumulatifnol
+dfproduksikumulatifnol['sub-region'] = listsubregionkumulatifnol     
+                                                        
+st.write(dfproduksinol)
+st.write(dfproduksikumulatifnol)
