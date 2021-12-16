@@ -1,4 +1,3 @@
-#IMPORT AWAL
 import json
 import pandas as pd
 import numpy as np
@@ -10,19 +9,17 @@ from f_Handler import csvHandler,jsonHandler
 
 #READ DATA JSON
 with open("kode_negara_lengkap.json", "r") as read_file:
-    data = json.load(read_file)
-# for i in data:
-#     print(type(i))
-print(data[0])
-dfJ = pd.DataFrame(data)
+    fname = json.load(read_file)
+print(fname[0])
+dfJ = pd.DataFrame(fname)
 
-#READ DATA CSV
+#DATA CSV
 csv = pd.read_csv("produksi_minyak_mentah.csv")
 df = pd.DataFrame(csv)
 print(df)
 
 
-#MEMBUAT DATA FRAME TIAP FILE
+#MEMBUAT DATA FRAME
 st.title('Data Produksi Minyak Mentah')
 st.header('UAS Pemrograman Komputer')
 ch_ = csvHandler('produksi_minyak_mentah.csv')
