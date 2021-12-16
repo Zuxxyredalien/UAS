@@ -86,6 +86,27 @@ df3.plot.bar(x='kode_negara', y='produksi')
 plt.show()
 st.pyplot(plt)
 
+#c
+st.write('Grafik Negara dengan Produksi Kumulatif Terbesar')
+list_a = []
+kumulatif = []
+
+for i in list (csv_['kode_negara']) :
+    if i not in list_a:
+        list_a.append(i)
+        
+for i in list_a :
+    a=csv_.loc[csv_['kode_negara'] ==i,'produksi'].sum()
+    kumulatif.append(a)
+    
+dk = pd.DataFrame(list(zip(list_a,kumulatif)), columns = ['kode_negara','kumulatif'])
+dk = dk.sort_values(by=['kumulatif'], ascending = False)
+dk = dk[:n]
+
+dk.plot.bar(x='kode_negara', y='kumulatif') 
+plt.show()
+st.pyplot(plt)
+
 dfterkecil = dfb[dfb.produksi !=0]
 dfterkecil = dfterkecil.sort_values(by=['produksi'],ascending=True)
 jumlah_produksi = dfterkecil[:1].iloc[0]['produksi']
