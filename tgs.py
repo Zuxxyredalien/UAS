@@ -89,7 +89,7 @@ df3.plot.bar(x='kode_negara', y='produksi')
 plt.show()
 st.pyplot(plt)
 
-[21.06, 16/12/2021] Tan Manuel Itb: dfterkecil = dfb[dfb.produksi !=0]
+dfterkecil = dfb[dfb.produksi !=0]
 dfterkecil = dfterkecil.sort_values(by=['produksi'],ascending=True)
 jumlah_produksi = dfterkecil[:1].iloc[0]['produksi']
 kode_negara = dfterkecil[:1].iloc[0]['kode_negara']
